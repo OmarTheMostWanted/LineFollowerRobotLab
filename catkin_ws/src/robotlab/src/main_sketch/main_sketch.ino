@@ -26,7 +26,7 @@ int distance;
 boolean runForward = false;
 
 // define speed vars
-int currSpeed = 125;
+float currSpeed = 2.5;
 int controlDelay = 200;
 int FW1_Speed = 125;
 int FW2_Speed = 125;
@@ -86,32 +86,34 @@ void stop(){
 //listener to twist and its callback
  void controlTwist(const geometry_msgs::Twist& msg) {
    
+   currSpeed = min(abs(msg.linear.x), 2.5);
+   
    if(msg.linear.x == 0 && msg.angular.z == 0) {     //stop
      stop();
    }  
    else if(msg.linear.x > 0 && msg.angular.z == 0) { //go forward
-     forward(100 * msg.linear.x, 100 * msg.linear.x);
+     forward(100 * currSpeed, 100 * currSpeed);
    }
    else if(msg.linear.x > 0 && msg.angular.z > 0) {  //turn left-up
-     forward(100 * msg.linear.x, 100);
+     forward(100 * currSpeed, 100);
    }
    else if(msg.linear.x > 0 && msg.angular.z < 0) {  //turn right-up
-     forward(100, 100 * msg.linear.x);
+     forward(100, 100 * currSpeed);
    } 
    else if (msg.linear.x == 0 && msg.angular.z > 0) { //turn left
-     forward(200, 0);
+     turn(200, 0);
    }
    else if (msg.linear.x == 0 && msg.angular.z < 0) { //turn right
-     forward(0, 200);
+     turn(0, 200);
    }
    else if (msg.linear.x < 0 && msg.angular.z == 0) {  //go backward
-     backward(50 * abs(msg.linear.x), 50 * abs(msg.linear.x));
+     backward(100 * currSpeed, 100 * currSpeed);
    }
    else if (msg.linear.x < 0 && msg.angular.z > 0) {  //turn right-back
-     backward(50, 50 * abs(msg.linear.x));
+     backward(50, 50 * currSpeed);
    }
    else if (msg.linear.x < 0 && msg.angular.z < 0) {  //turn left-back
-     backward(50 * abs(msg.linear.x), 50);
+     backward(50 * currSpeed, 50);
    }
  }
  ros::Subscriber<geometry_msgs::Twist> subTwist("cmd_vel", &controlTwist );
