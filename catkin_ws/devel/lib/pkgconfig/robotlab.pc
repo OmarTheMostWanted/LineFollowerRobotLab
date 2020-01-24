@@ -1,0 +1,8 @@
+prefix=/home/tmw/catkin_ws/devel
+
+Name: robotlab
+Description: Description of robotlab
+Version: 0.0.0
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: 

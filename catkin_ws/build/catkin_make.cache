@@ -1,0 +1,2 @@
+robotlab
+-DCATKIN_DEVEL_PREFIX=/home/tmw/catkin_ws/devel -DCMAKE_INSTALL_PREFIX=/home/tmw/catkin_ws/install -G Unix Makefiles
