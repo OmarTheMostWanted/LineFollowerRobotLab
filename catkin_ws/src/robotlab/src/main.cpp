@@ -19,14 +19,14 @@ void turnRight(int diff) {
 }
 
 void idk() {
-    std::cout << "idk" << std::endl;
+//    std::cout << "idk" << std::endl;
 }
 
 //![variables]
 Mat src, src_gray;
 Mat dst, detected_edges;
 
-int lowThreshold = 80;
+int lowThreshold = 60;
 const int max_lowThreshold = 100;
 const int ratio = 3;
 const int kernel_size = 3;
@@ -182,7 +182,7 @@ std::vector<int> convert(Mat &srcIm) {
 
 //            int max = 40;
 
-            int diff = 10;
+            int diff = 20;
 
             //  &&  red > max && green > max && blue > max
 
@@ -202,12 +202,15 @@ std::vector<int> convert(Mat &srcIm) {
     imshow(window_name, dst);
 
 
-    if (numberOfValues != 0) {
+    if (numberOfValues != 0 && numberOfValues < 5000) {
         mean = sum / numberOfValues;
 //        std::cout << numberOfValues << std::endl;
     }
 
     if (mean != -1) {
+
+        std::cout << (detected_edges.cols / 2) - mean << std::endl;
+
         if (mean < detected_edges.cols / 2) {
             turnLeft(detected_edges.cols / 2 - mean);
             std::vector<int> res = {0, (detected_edges.cols / 2 - mean)};

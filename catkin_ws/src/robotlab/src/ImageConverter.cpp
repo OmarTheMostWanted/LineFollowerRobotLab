@@ -65,40 +65,46 @@ public:
 //            t.linear.x = 0.5;
 //            t.angular.z = 0;
 
+
+//
+//            100 > TURN HARD
+//            100 > X > 50 TURN SLOW
+//
+//            50 > STAY
             //left
             if (res[0] == 0) {
 
-                if(res[1] > 100){
+                if(res[1] > 130){
                     t.linear.x = 0;
-                    t.angular.z = -2;
-                }
-
-                if(res[1] > 50 && res[1] < 100){
-                    t.linear.x = 1;
                     t.angular.z = -1;
                 }
 
-                if(res[1] < 50){
-                    t.linear.x = 1;
-                    t.angular.z = -0.5;
+                if(res[1] > 100 && res[1] < 130){
+                    t.linear.x = 3;
+                    t.angular.z = -1;
+                }
+
+                if(res[1] < 100){
+                    t.linear.x = 0.6;
+                    t.angular.z = 0;
                 }
             }
 
             //right
             if (res[0] == 1) {
-                if(res[1] > 100){
+                if(res[1] > 130){
                     t.linear.x = 0;
-                    t.angular.z = 2;
-                }
-
-                if(res[1] > 50 && res[1] < 100){
-                    t.linear.x = 1;
                     t.angular.z = 1;
                 }
 
-                if(res[1] < 50){
-                    t.linear.x = 1;
-                    t.angular.z = 0.5;
+                if(res[1] > 100 && res[1] < 130){
+                    t.linear.x = 3;
+                    t.angular.z = 1;
+                }
+
+                if(res[1] < 100){
+                    t.linear.x = 0.6;
+                    t.angular.z = 0;
                 }
             }
 

@@ -95,16 +95,16 @@ void stop(){
      forward(100 * currSpeed, 100 * currSpeed);
    }
    else if(msg.linear.x > 0 && msg.angular.z > 0) {  //turn left-up
-     forward(100 * currSpeed, 100);
+     forward(50 * currSpeed, 100);
    }
    else if(msg.linear.x > 0 && msg.angular.z < 0) {  //turn right-up
-     forward(100, 100 * currSpeed);
+     forward(50, 100 * currSpeed);
    } 
    else if (msg.linear.x == 0 && msg.angular.z > 0) { //turn left
-     turn(200, 0);
+     turn(100, 0);
    }
    else if (msg.linear.x == 0 && msg.angular.z < 0) { //turn right
-     turn(0, 200);
+     turn(0, 100);
    }
    else if (msg.linear.x < 0 && msg.angular.z == 0) {  //go backward
      backward(100 * currSpeed, 100 * currSpeed);
