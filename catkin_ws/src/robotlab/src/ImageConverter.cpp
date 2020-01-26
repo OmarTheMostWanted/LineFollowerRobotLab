@@ -22,27 +22,13 @@ class ImageConverter {
 
     ros::Publisher chatter_pub = nh_.advertise<geometry_msgs::Twist>("/cmd_vel", 1000);
 
-
-    // ros::Rate loop_rate(10);
-
-//    std::vector res;
-//    ros::Publisher = chatter("line" , res);
-
 public:
     ImageConverter()
             : it_(nh_) {
-
-
+                
         // Subscrive to input video feed and publish output video feed
         image_sub_ = it_.subscribe("/camera/image", 1,
                                    &ImageConverter::imageCb, this);
-        //     image_pub_ = it_.advertise("/image_converter/output_video", 1);
-
-
-        //=========================
-//         pub = advertise("/line", 1);
-
-//    cv::namedWindow(OPENCV_WINDOW);
     }
 
     ~ImageConverter() {
@@ -62,15 +48,6 @@ public:
 
             geometry_msgs::Twist t;
 
-//            t.linear.x = 0.5;
-//            t.angular.z = 0;
-
-
-//
-//            100 > TURN HARD
-//            100 > X > 50 TURN SLOW
-//
-//            50 > STAY
             //left
             if (res[0] == 0) {
 
@@ -92,12 +69,12 @@ public:
 
             //right
             if (res[0] == 1) {
-                if(res[1] > 130){
+                if(res[1] > 160){
                     t.linear.x = 0;
                     t.angular.z = 1;
                 }
 
-                if(res[1] > 100 && res[1] < 130){
+                if(res[1] > 100 && res[1] < 160){
                     t.linear.x = 3;
                     t.angular.z = 1;
                 }
@@ -115,23 +92,6 @@ public:
 
             chatter_pub.publish(t);
 
-
-
-
-            ////////////
-
-//            std_msgs::String msg;
-//
-//            std::stringstream ss;
-//            ss << "hello world ";
-//            msg.data = ss.str();
-//
-//            ROS_INFO("%s", msg.data.c_str());
-//
-//
-
-            // loop_rate.sleep();
-
         }
         catch (cv_bridge::Exception &e) {
             ROS_ERROR("cv_bridge exception: %s", e.what());
@@ -143,20 +103,11 @@ public:
         if (cv_ptr->image.rows > 60 && cv_ptr->image.cols > 60)
             cv::circle(cv_ptr->image, cv::Point(50, 50), 10, CV_RGB(255, 0, 0));
 
-
-//         Update GUI Window
-//        cv::imshow(OPENCV_WINDOW, cv_ptr->image);
         cv::waitKey(3);
-
-        // Output modified video stream
-        //   image_pub_.publish(cv_ptr->toImageMsg());
     }
 };
 
 int main(int argc, char **argv) {
-
-//    std::cout << "IM here" << std::endl;
-
     ros::init(argc, argv, "image_converter");
 
     ImageConverter ic;
