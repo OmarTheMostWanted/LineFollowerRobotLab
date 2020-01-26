@@ -51,12 +51,12 @@ public:
             //left
             if (res[0] == 0) {
 
-                if(res[1] > 130){
+                if(res[1] > 160){
                     t.linear.x = 0;
                     t.angular.z = -1;
                 }
 
-                if(res[1] > 100 && res[1] < 130){
+                if(res[1] > 100 && res[1] < 160){
                     t.linear.x = 3;
                     t.angular.z = -1;
                 }
